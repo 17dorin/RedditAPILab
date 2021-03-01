@@ -1,0 +1,26 @@
+﻿@model Reddit
+
+@if (Model.data.children.Count() == 0)
+{
+    <h2>Could not find the specified Sub Reddit, please try again</h2>
+}
+else
+{
+    <h2>@Model.data.children[0].data.subreddit_name_prefixed</h2>
+
+    int i = 1;
+    @foreach (Child c in Model.data.children)
+    {
+        if (i < 11)
+        {
+            <p>_____________________________________________________________________________</p>
+            <h4>@c.data.title</h4>
+            @if (c.data.thumbnail != "self" && c.data.thumbnail != "default")
+            {
+                <img src="@c.data.thumbnail" />
+            }
+            <a href="@c.data.url">Link to post</a>
+        }
+        i++;
+    }
+}
